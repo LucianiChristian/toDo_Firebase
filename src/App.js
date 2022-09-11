@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, FormControl, Input, InputLabel } from '@mui/material';
 import React from 'react';
 
 import './App.css';
@@ -28,7 +28,10 @@ function App() {
   return (
     <div>
       <h1>To-Do? 🌗</h1>
-      <input type="text" value={input} onChange={handleInput}/>
+      <FormControl>
+        <InputLabel htmlFor="toDo">Write A To-Do</InputLabel>
+        <Input id="toDo" value={input} onChange={handleInput}/>
+      </FormControl>
       <Button variant="contained" color="primary" onClick={addToDo} disabled={!input}>Add To-Do</Button>
       <ul>
         {todoElements}
