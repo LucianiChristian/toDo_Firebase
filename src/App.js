@@ -1,11 +1,19 @@
 import { Button, FormControl, Input, InputLabel } from '@mui/material';
 import React from 'react';
+import ToDo from './ToDo';
+import db from './firebase.js';
 
 import './App.css';
 
 function App() {
-  const [todos, setTodos] = React.useState(["Take dogs for a walk", "Take 😙", "Zzzzt"]);
+  const [todos, setTodos] = React.useState([]);
   const [input, setInput] = React.useState("");
+
+  React.useEffect(() => {
+    db.collection('todos').onSnapshot(snapshot => {
+      setTodos(snapshot.docs.map(doc => doc.data().todo))
+    });
+  }, []); 
 
   function handleInput(event) {
     const userInput = event.target.value;
@@ -16,13 +24,17 @@ function App() {
   function addToDo(event) {
     event.preventDefault();
 
+    db.collection('todos').add({
+      todo: input,
+    });
+
     setTodos(currentToDos => [...currentToDos, input]);
 
     setInput("");
   }
 
   const todoElements = todos.map(todo => (
-    <li>{todo}</li>
+    <ToDo text={todo}/>
   ))
 
   return (
