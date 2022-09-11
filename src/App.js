@@ -5,8 +5,18 @@ function App() {
   const [todos, setTodos] = React.useState(["Take dogs for a walk", "Take 😙", "Zzzzt"]);
   const [input, setInput] = React.useState("");
 
-  function handleInput() {
-    console.log("testing");
+  function handleInput(event) {
+    const userInput = event.target.value;
+    
+    setInput(userInput);
+  }
+
+  function addToDo(event) {
+    event.preventDefault();
+
+    setTodos(currentToDos => [...currentToDos, input]);
+
+    setInput("");
   }
 
   const todoElements = todos.map(todo => (
@@ -17,7 +27,7 @@ function App() {
     <div>
       <h1>To-Do? 🌗</h1>
       <input type="text" value={input} onChange={handleInput}/>
-      <button type="button">Add To-Do 🇦🇫</button>
+      <button type="button" onClick={addToDo}>Add To-Do 🇦🇫</button>
 
       <ul>
         {todoElements}
