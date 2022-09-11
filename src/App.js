@@ -1,4 +1,6 @@
+import { Button } from '@mui/material';
 import React from 'react';
+
 import './App.css';
 
 function App() {
@@ -27,8 +29,7 @@ function App() {
     <div>
       <h1>To-Do? 🌗</h1>
       <input type="text" value={input} onChange={handleInput}/>
-      <button type="button" onClick={addToDo}>Add To-Do 🇦🇫</button>
-
+      <Button variant="contained" color="primary" onClick={addToDo} disabled={!input}>Add To-Do</Button>
       <ul>
         {todoElements}
       </ul>
